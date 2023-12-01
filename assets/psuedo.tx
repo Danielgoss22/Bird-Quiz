@@ -1,11 +1,6 @@
-create initial variables for questions, and references to the Id' needed to display
-figure out how to show questions through js 
-figure out how to generate buttons through js
-generate timer for countdown 
-figure out how a worng answer will remove a certain amount of time. 
-
-I just wnat to show the options for the first question
-
-make a dynamic button for each possAnswers
-
-need and init function at some time 
+TODO:
+set up timer function
+check timer function vs if statement of the incorect to decriment time
+as time goes down else statement for end quiz once it hits 0 to call end quiz function
+set up end of quiz function and html section for that
+highscore page 

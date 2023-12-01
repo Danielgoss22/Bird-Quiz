@@ -1,14 +1,14 @@
 var questionsE1 = document.getElementById("questions");
 var answersE1 = document.getElementById("answers");
-var timerE1 = document.getElementById("time-allowed");
-var startBtn = document.querySelector(".start");
+// var timerE1 = document.getElementById("time-allowed");
+// var startBtn = document.querySelector(".start");
 var timer;
 var timeAllowed;
 var score = 0;
 
 // var quiz = document.createElement("<h2>");
 var questionTitle = document.getElementById("question-title");
-//
+var choicesE1 = document.getElementById("choices");
 var currentIndex = 0;
 var quiz = [
   {
@@ -23,28 +23,48 @@ var quiz = [
   },
 ];
 
-function startQuiz() {
-  isCorrect = false;
-  timeAllowed = 80;
-  startBtn.disabled = true;
-  getQuestion();
-  startTimer();
-}
 function getQuestion() {
   var currentQuestion = quiz[currentIndex];
-  //   console.log(currentQuestion);
+  choicesE1.textContent = "";
+  questionTitle.textContent = "";
+  //TODO: check if the last index matches the index of the array clear
+  if (currentIndex < quiz.length) {
+    for (var i = 0; i < currentQuestion.possAnswers.length; i++) {
+      var btnEl = document.createElement("button");
 
-  for (var i = 0; i < currentQuestion.possAnswers.length; i++) {
-    //create a button for the first question possAnswers
-    var btnEl = document.createElement("button");
-    //grab value of posanswers
-    btnEl.textContent = currentQuestion.possAnswers[i];
-    // btnEl.appendChild(questionTitle);
-    questionTitle.textContent = quiz[0].question;
+      btnEl.textContent = currentQuestion.possAnswers[i];
+      choicesE1.appendChild(btnEl);
+      questionTitle.textContent = currentQuestion.question;
+      btnEl.addEventListener("click", function () {
+        //   console.log(this.textContent);
+        if (this.textContent !== currentQuestion.rightAns) {
+          //TODO: subtract 3 seconds from the timer
+          //TODO: go to the next question
+          currentIndex++;
+          getQuestion();
+        } else {
+          //TODO: add 5 points to var in global
+          //TODO: go to the next question
+          currentIndex++;
+          getQuestion();
+        }
+      });
+    }
+  } else {
+    //TODO: SHOW END OF QUIZ DELIGATE TO ITS OWN FUNCTION
+    // SHOW CURRENT SCORE END QUIZ FUNCTION TELLS HTML TO SHOW
+    console.log("quiz.end");
   }
 }
-
+// console.log(this);
 getQuestion();
+// function startQuiz() {
+//   isCorrect = false;
+//   timeAllowed = 80;
+//   startBtn.disabled = true;
+//   getQuestion();
+//   startTimer();
+// }
 
 function startTimer() {
   // Sets timer
