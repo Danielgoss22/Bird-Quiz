@@ -1,6 +1,17 @@
 * {
   box-sizing: border-box;
 }
-h1 {
+header {
   text-align: center;
+  align-items: center;
+}
+div {
+  text-align: center;
+}
+#time-allowed {
+  font-size: 30px;
+}
+.start {
+  display: flex;
+  justify-content: center;
 }

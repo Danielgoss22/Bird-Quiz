@@ -1,6 +1,9 @@
 var questionsE1 = document.getElementById("questions");
 var answersE1 = document.getElementById("answers");
-var timer = 80;
+var timerE1 = document.getElementById("time-allowed");
+var startBtn = document.querySelector(".start");
+var timer;
+var timeAllowed;
 var score = 0;
 
 // var quiz = document.createElement("<h2>");
@@ -19,6 +22,14 @@ var quiz = [
     possAnswers: ["duck", "heron"],
   },
 ];
+
+function startQuiz() {
+  isCorrect = false;
+  timeAllowed = 80;
+  startBtn.disabled = true;
+  getQuestion();
+  startTimer();
+}
 function getQuestion() {
   var currentQuestion = quiz[currentIndex];
   //   console.log(currentQuestion);
@@ -28,11 +39,34 @@ function getQuestion() {
     var btnEl = document.createElement("button");
     //grab value of posanswers
     btnEl.textContent = currentQuestion.possAnswers[i];
-    btnEl.append;
+    // btnEl.appendChild(questionTitle);
+    questionTitle.textContent = quiz[0].question;
   }
 }
+
 getQuestion();
-// questionTitle.textContent = quiz[0].question;
+
+function startTimer() {
+  // Sets timer
+  timer = setInterval(function () {
+    timeAllowed--;
+    timerE1.textContent = timeAllowed;
+    if (timeAllowed >= 0) {
+      // Tests if win condition is met
+      if (isWin && timeAllowed > 0) {
+        // Clears interval and stops timer
+        clearInterval(timer);
+        winGame();
+      }
+    }
+    // Tests if time has run out
+    if (timerCount === 0) {
+      // Clears interval
+      clearInterval(timer);
+      loseGame();
+    }
+  }, 1000);
+}
 // questionTitle.textContent = quiz[1].question;
 // questionsE1.appendChild(question1);
 // function quizQ1() {}
