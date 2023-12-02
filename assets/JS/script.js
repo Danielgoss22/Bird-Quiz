@@ -1,10 +1,11 @@
 var questionsE1 = document.getElementById("questions");
 var quizEndE1 = document.getElementById("quiz-end");
 var timerE1 = document.getElementById("time-allowed");
+var scoreE1 = document.getElementById("score");
 // var startBtn = document.querySelector(".start");
 var timer;
 var timeAllowed;
-var score = [];
+var score = 0;
 
 // var quiz = document.createElement("<h2>");
 var questionTitle = document.getElementById("question-title");
@@ -47,7 +48,7 @@ function getQuestion() {
   var currentQuestion = quiz[currentIndex];
   choicesE1.textContent = "";
   questionTitle.textContent = "";
-  //TODO: check if the last index matches the index of the array clear
+
   if (currentIndex < quiz.length) {
     for (var i = 0; i < currentQuestion.possAnswers.length; i++) {
       var btnEl = document.createElement("button");
@@ -64,6 +65,7 @@ function getQuestion() {
           getQuestion();
         } else {
           //TODO: add 5 points to var in global
+          score = score + 5;
 
           currentIndex++;
           getQuestion();
@@ -78,8 +80,10 @@ function getQuestion() {
 }
 function quizEnd() {
   var quizEndE2 = document.createElement("h1");
+
   quizEndE1.textContent = "End Of Quiz!";
   quizEndE1.appendChild(quizEndE2);
+  scoreE1.append(score);
 }
 // console.log(this);
 getQuestion();
@@ -90,7 +94,7 @@ getQuestion();
 //   getQuestion();
 //   startTimer();
 // }
-
+console.log(score);
 function startTimer() {
   // Sets timer
   timer = setInterval(function () {
