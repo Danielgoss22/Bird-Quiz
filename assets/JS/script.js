@@ -6,7 +6,7 @@ var scoreE1 = document.getElementById("score");
 var timer;
 var timeAllowed;
 var score = 0;
-// var scoreE2 = ["1"];
+let scoreE2 = [];
 
 var questionTitle = document.getElementById("question-title");
 var choicesE1 = document.getElementById("choices");
@@ -48,7 +48,6 @@ function getQuestion() {
   var currentQuestion = quiz[currentIndex];
   choicesE1.textContent = "";
   questionTitle.textContent = "";
-  // scoreE2 = [];
 
   if (currentIndex < quiz.length) {
     for (var i = 0; i < currentQuestion.possAnswers.length; i++) {
@@ -67,6 +66,7 @@ function getQuestion() {
         } else {
           //TODO: add 5 points to var in global
           score = score += 5;
+          scoreE2.push(score);
 
           currentIndex++;
           getQuestion();
@@ -79,14 +79,16 @@ function getQuestion() {
     // SHOW CURRENT SCORE END QUIZ FUNCTION TELLS HTML TO SHOW
   }
 }
+
 function quizEnd() {
   var quizEndE2 = document.createElement("h1");
-  var scoreE2 = document.createElement("h3");
-  scoreE1.textContent = "score";
+  // scoreE1 = document.createElement("h3");
 
-  quizEndE1.textContent = "End Of Quiz!";
+  quizEndE2.textContent = "End Of Quiz!";
   quizEndE1.appendChild(quizEndE2);
-  scoreE1.appendChild(scoreE2);
+  scoreE1.textContent = "Your Score " + scoreE2[scoreE2.length - 1];
+  // scoreE1.appendChild(scoreE2);
+  // [{ javier: 1 }]; local storage stringify with JSONor{ "javier": 1 }
 }
 // console.log(this);
 getQuestion();
@@ -97,7 +99,7 @@ getQuestion();
 //   getQuestion();
 //   startTimer();
 // }
-console.log(score);
+console.log(scoreE2);
 function startTimer() {
   // Sets timer
   timer = setInterval(function () {
