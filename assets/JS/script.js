@@ -6,8 +6,8 @@ var scoreE1 = document.getElementById("score");
 var timer;
 var timeAllowed;
 var score = 0;
+// var scoreE2 = ["1"];
 
-// var quiz = document.createElement("<h2>");
 var questionTitle = document.getElementById("question-title");
 var choicesE1 = document.getElementById("choices");
 var currentIndex = 0;
@@ -23,7 +23,7 @@ var quiz = [
     possAnswers: ["Mallard", "Heron", "Cormorant", "Norther Shoveler"],
   },
   {
-    question: "What is the largest bird on the planet?",
+    question: "What is the largest flighted bird on the planet?",
     rightAns: "Wandering Albatross",
     possAnswers: ["Golden Eagle", "Ostrich", "Emu", "Wandering Albatross"],
   },
@@ -48,6 +48,7 @@ function getQuestion() {
   var currentQuestion = quiz[currentIndex];
   choicesE1.textContent = "";
   questionTitle.textContent = "";
+  // scoreE2 = [];
 
   if (currentIndex < quiz.length) {
     for (var i = 0; i < currentQuestion.possAnswers.length; i++) {
@@ -57,15 +58,15 @@ function getQuestion() {
       choicesE1.appendChild(btnEl);
       questionTitle.textContent = currentQuestion.question;
       btnEl.addEventListener("click", function () {
-        //   console.log(this.textContent);
         if (this.textContent !== currentQuestion.rightAns) {
           //TODO: subtract 3 seconds from the timer
+          //timeCounter -3
 
           currentIndex++;
           getQuestion();
         } else {
           //TODO: add 5 points to var in global
-          score = score + 5;
+          score = score += 5;
 
           currentIndex++;
           getQuestion();
@@ -80,10 +81,12 @@ function getQuestion() {
 }
 function quizEnd() {
   var quizEndE2 = document.createElement("h1");
+  var scoreE2 = document.createElement("h3");
+  scoreE1.textContent = "score";
 
   quizEndE1.textContent = "End Of Quiz!";
   quizEndE1.appendChild(quizEndE2);
-  scoreE1.append(score);
+  scoreE1.appendChild(scoreE2);
 }
 // console.log(this);
 getQuestion();
