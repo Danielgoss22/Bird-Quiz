@@ -1,10 +1,10 @@
 var questionsE1 = document.getElementById("questions");
-var answersE1 = document.getElementById("answers");
-// var timerE1 = document.getElementById("time-allowed");
+var quizEndE1 = document.getElementById("quiz-end");
+var timerE1 = document.getElementById("time-allowed");
 // var startBtn = document.querySelector(".start");
 var timer;
 var timeAllowed;
-var score = 0;
+var score = [];
 
 // var quiz = document.createElement("<h2>");
 var questionTitle = document.getElementById("question-title");
@@ -18,8 +18,28 @@ var quiz = [
   },
   {
     question: "What is the most common waterfowl in Colorado?",
-    rightAns: "duck",
-    possAnswers: ["duck", "heron"],
+    rightAns: "Mallard",
+    possAnswers: ["Mallard", "Heron", "Cormorant", "Norther Shoveler"],
+  },
+  {
+    question: "What is the largest bird on the planet?",
+    rightAns: "Wandering Albatross",
+    possAnswers: ["Golden Eagle", "Ostrich", "Emu", "Wandering Albatross"],
+  },
+  {
+    question: "What is Colorado's State bird?",
+    rightAns: "Lark Bunting",
+    possAnswers: [
+      "Lark Bunting",
+      "Rock Pigeon",
+      "Red-Throated Hummingbird",
+      "House Sparrow",
+    ],
+  },
+  {
+    question: "What is the United State's national bird?",
+    rightAns: "Bald Eagle",
+    possAnswers: ["American Robin", "Raven", "Bald Eagle", "Crow"],
   },
 ];
 
@@ -39,12 +59,12 @@ function getQuestion() {
         //   console.log(this.textContent);
         if (this.textContent !== currentQuestion.rightAns) {
           //TODO: subtract 3 seconds from the timer
-          //TODO: go to the next question
+
           currentIndex++;
           getQuestion();
         } else {
           //TODO: add 5 points to var in global
-          //TODO: go to the next question
+
           currentIndex++;
           getQuestion();
         }
@@ -52,9 +72,14 @@ function getQuestion() {
     }
   } else {
     //TODO: SHOW END OF QUIZ DELIGATE TO ITS OWN FUNCTION
+    quizEnd();
     // SHOW CURRENT SCORE END QUIZ FUNCTION TELLS HTML TO SHOW
-    console.log("quiz.end");
   }
+}
+function quizEnd() {
+  var quizEndE2 = document.createElement("h1");
+  quizEndE1.textContent = "End Of Quiz!";
+  quizEndE1.appendChild(quizEndE2);
 }
 // console.log(this);
 getQuestion();
