@@ -59,14 +59,12 @@ function getQuestion() {
       questionTitle.textContent = currentQuestion.question;
       btnEl.addEventListener("click", function () {
         if (this.textContent !== currentQuestion.rightAns) {
-          //TODO: subtract 3 seconds from the timer
-          //timeCounter -3\
           timeAllowed -= 5;
+          timerE1.textContent = timeAllowed;
 
           currentIndex++;
           getQuestion();
         } else {
-          //TODO: add 5 points to var in global
           score = score += 5;
           scoreE2.push(score);
 
@@ -76,9 +74,8 @@ function getQuestion() {
       });
     }
   } else {
-    //TODO: SHOW END OF QUIZ DELIGATE TO ITS OWN FUNCTION
     quizEnd();
-    // SHOW CURRENT SCORE END QUIZ FUNCTION TELLS HTML TO SHOW
+    clearInterval(timer);
   }
 }
 
@@ -88,14 +85,18 @@ function quizEnd() {
   quizEndE2.textContent = "End Of Quiz!";
   quizEndE1.appendChild(quizEndE2);
   scoreE1.textContent = "Your Score " + scoreE2[scoreE2.length - 1];
-
-  // [{ javier: 1 }]; local storage stringify with JSONor{ "javier": 1 }
+  if (timeAllowed === 0) {
+    scoreE1.textContent = "Your Score 0";
+  }
+  let userInput = prompt("Please enter your Initials for the scoreboard!");
+  var scoreBoard = {
+    user: userInput,
+    total: scoreE2[scoreE2.length - 1],
+  };
+  localStorage.setItem("score", JSON.stringify(scoreBoard));
 }
-// console.log(this);
-// getQuestion();
 
 function startQuiz() {
-  // isCorrect = false;
   timeAllowed = 30;
   if (startBtn === false) {
   }
@@ -105,29 +106,14 @@ function startQuiz() {
 }
 
 function startTimer() {
-  // Sets timer
   timer = setInterval(function () {
     timeAllowed--;
     timerE1.textContent = "Time left " + timeAllowed;
-    // if (timeAllowed >= 0) {
-    //   // Tests if win condition is met
-    //   if (isWin && timeAllowed > 0) {
-    //     // Clears interval and stops timer
-    //     clearInterval(timer);
-    //     winGame();
-    //   }
-    // }
-    // Tests if time has run out
+    t;
     if (timeAllowed === 0) {
-      // Clears interval
       clearInterval(timer);
       quizEnd();
     }
   }, 1000);
 }
 startBtn.addEventListener("click", startQuiz);
-// questionTitle.textContent = quiz[1].question;
-// questionsE1.appendChild(question1);
-// function quizQ1() {}
-// console.log(quiz.question);
-// s
