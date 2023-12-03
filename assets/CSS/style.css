@@ -12,6 +12,6 @@ div {
   font-size: 30px;
 }
 .start {
-  display: flex;
-  justify-content: center;
+  text-align: center;
+  align-items: center;
 }
