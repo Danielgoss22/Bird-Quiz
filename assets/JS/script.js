@@ -3,7 +3,10 @@ var quizEndE1 = document.getElementById("quiz-end");
 var timerE1 = document.getElementById("time-allowed");
 var scoreE1 = document.getElementById("score");
 var startBtn = document.querySelector(".start");
-// var startBtn = document.querySelector(".start");
+var highScoreBtn = document.getElementById("highscore");
+// var initials = document.getElementById("initials");
+// var saveBtn = document.getElementById("save");
+
 var timer;
 var timeAllowed;
 var score = 0;
@@ -88,19 +91,30 @@ function quizEnd() {
   if (timeAllowed === 0) {
     scoreE1.textContent = "Your Score 0";
   }
-  let userInput = prompt("Please enter your Initials for the scoreboard!");
+  // var saveBtn = document.createElement("button");
+  let userInput = prompt("Please enter your initials for the Scoreboard!");
+
   var scoreBoard = {
-    user: userInput,
+    userInput: userInput.trim(),
     total: scoreE2[scoreE2.length - 1],
   };
+
   localStorage.setItem("score", JSON.stringify(scoreBoard));
+
+  // clearInterval(timer);
 }
 
+function highScores() {
+  var highScore = JSON.parse(localStorage.getItem("scoreBoard"));
+  var board = document.createElement("ul");
+  highScore.textContent = scoreBoard.userInput;
+  highScoreBtn.appendChild(board);
+}
+s;
 function startQuiz() {
   timeAllowed = 30;
   if (startBtn === false) {
   }
-
   getQuestion();
   startTimer();
 }
@@ -109,7 +123,7 @@ function startTimer() {
   timer = setInterval(function () {
     timeAllowed--;
     timerE1.textContent = "Time left " + timeAllowed;
-    t;
+
     if (timeAllowed === 0) {
       clearInterval(timer);
       quizEnd();
