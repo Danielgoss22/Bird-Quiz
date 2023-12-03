@@ -4,8 +4,7 @@ var timerE1 = document.getElementById("time-allowed");
 var scoreE1 = document.getElementById("score");
 var startBtn = document.querySelector(".start");
 var highScoreBtn = document.getElementById("highscore");
-// var initials = document.getElementById("initials");
-// var saveBtn = document.getElementById("save");
+var scoresEl3 = document.getElementById("high-scores");
 
 var timer;
 var timeAllowed;
@@ -91,9 +90,7 @@ function quizEnd() {
   if (timeAllowed === 0) {
     scoreE1.textContent = "Your Score 0";
   }
-  // var saveBtn = document.createElement("button");
-  // add new score to highscores array
-  // save entire highscores array to local storage
+
   let userInput = prompt("Please enter your initials for the Scoreboard!");
 
   var scoreBoard = {
@@ -101,22 +98,20 @@ function quizEnd() {
     total: scoreE2[scoreE2.length - 1],
   };
 
-  // window.localStorage.setItem("scores", JSON.stringify(highscores));
   var highScores = JSON.parse(localStorage.getItem("score")) || [];
   highScores.push(scoreBoard);
   localStorage.setItem("score", JSON.stringify(highScores));
-
-  // clearInterval(timer);
 }
 
 function highScore() {
   var scorePage = JSON.parse(localStorage.getItem("score"));
   for (var i = 0; i < scorePage.length; i++) {
     var initials = document.createElement("li");
-    // var userScore = document.createElement("li");
-    initials.textContent = scorePage.userInput;
-    initials.textContent = scorePage.total;
-    highScoreBtn.appendChild(initials);
+
+    initials.textContent =
+      "User: " + scorePage[i].userInput + " Score: " + scorePage[i].total;
+
+    scoresEl3.appendChild(initials);
   }
 }
 
