@@ -92,6 +92,8 @@ function quizEnd() {
     scoreE1.textContent = "Your Score 0";
   }
   // var saveBtn = document.createElement("button");
+  // add new score to highscores array
+  // save entire highscores array to local storage
   let userInput = prompt("Please enter your initials for the Scoreboard!");
 
   var scoreBoard = {
@@ -99,18 +101,25 @@ function quizEnd() {
     total: scoreE2[scoreE2.length - 1],
   };
 
-  localStorage.setItem("score", JSON.stringify(scoreBoard));
+  // window.localStorage.setItem("scores", JSON.stringify(highscores));
+  var highScores = JSON.parse(localStorage.getItem("score")) || [];
+  highScores.push(scoreBoard);
+  localStorage.setItem("score", JSON.stringify(highScores));
 
   // clearInterval(timer);
 }
 
-function highScores() {
-  var highScore = JSON.parse(localStorage.getItem("scoreBoard"));
-  var board = document.createElement("ul");
-  highScore.textContent = scoreBoard.userInput;
-  highScoreBtn.appendChild(board);
+function highScore() {
+  var scorePage = JSON.parse(localStorage.getItem("score"));
+  for (var i = 0; i < scorePage.length; i++) {
+    var initials = document.createElement("li");
+    // var userScore = document.createElement("li");
+    initials.textContent = scorePage.userInput;
+    initials.textContent = scorePage.total;
+    highScoreBtn.appendChild(initials);
+  }
 }
-s;
+
 function startQuiz() {
   timeAllowed = 30;
   if (startBtn === false) {
@@ -131,3 +140,4 @@ function startTimer() {
   }, 1000);
 }
 startBtn.addEventListener("click", startQuiz);
+highScoreBtn.addEventListener("click", highScore);
